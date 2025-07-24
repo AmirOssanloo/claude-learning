@@ -1,35 +1,57 @@
-# Claude Learning – Detailed Guidelines
+# ArcadeForge – Detailed Development Guidelines
 
-> **Project**: Claude Learning Sample - TypeScript monorepo for testing Claude AI workflows  
-> **Package Manager**: pnpm (exclusively)
+> **Project**: ArcadeForge - Scalable drag-and-drop game creation SaaS platform  
+> **Domain**: Game development, real-time collaboration, asset management  
+> **Package Manager**: pnpm (exclusively)  
+> **Performance Target**: 60fps game editor and runtime
 
 ## Documentation Structure
 
 | Document | Purpose |
 | -------- | ------- |
-| `/CLAUDE.md` | Quick reference & overview |
-| `/.claude/CLAUDE.md` | This file - detailed rules |
+| `/CLAUDE.md` | Quick reference & game development overview |
+| `/.claude/CLAUDE.md` | This file - detailed game development rules |
 | `/.claude/AGENT_BASE.md` | Common agent guidelines |
-| `/.claude/plans/TEMPLATE.md` | Plan template |
-| `/.claude/WORKFLOW_VALIDATION.md` | Validation checks |
-| `/.claude/docs/frontend.md` | Frontend architecture |
-| `/.claude/docs/backend.md` | Backend architecture |
-| Agent files (`*.planner.md`, etc.) | Role-specific behavior |
+| `/.claude/plans/TEMPLATE.md` | Game development plan template |
+| `/.claude/WORKFLOW_VALIDATION.md` | Game development validation checks |
+| `/.claude/docs/game-editor.md` | Game editor architecture & patterns |
+| `/.claude/docs/game-engine.md` | Game runtime engine guidelines |
+| `/.claude/docs/asset-pipeline.md` | Asset processing workflows |
+| `/.claude/docs/frontend.md` | Frontend architecture (legacy) |
+| `/.claude/docs/backend.md` | Backend architecture (legacy) |
+| Agent files (`*.planner.md`, etc.) | Game development role-specific behavior |
 
-## Global Coding Rules
+## Game Development Coding Rules
 
-1. **TypeScript only** – strict mode; avoid `any`.
-2. **ES modules** everywhere (`import/export`).
-3. Follow lint + Prettier. No stray `console.log`.
-4. Respect hexagonal layering: `api → services → core → ports ← infrastructure`.
-5. **Tests are mandatory** for every feature or bug-fix.
-6. **Security:** validate all inputs; never hard-code secrets.
-7. **Performance:** avoid N+1 queries, unnecessary re-renders, CPU-heavy loops.
-8. **No unauthorized refactors** outside task scope.
-9. New deps require justification & must be added via `pnpm`.
-10. Commit flow: **Plan → Approve → Implement → Review → Test → Commit**.
+### Core Principles
+1. **TypeScript Strict** – No `any` types, comprehensive type coverage for game data
+2. **60fps Performance** – All game engine code must maintain 60fps target
+3. **ES Modules** – Use `import/export` throughout
+4. **Memory Management** – Implement proper cleanup for game objects and assets
+5. **Real-time Ready** – Design for multi-user collaboration from the start
 
-See the domain docs (`frontend.md`, `backend.md`, `packages.md`) and agent docs in `.claude/` for details.
+### Architecture Guidelines
+6. **Hexagonal Architecture** – `api → services → core → ports ← infrastructure`
+7. **Game Domain Separation** – Clear boundaries between editor, engine, and asset systems
+8. **Component Systems** – Use ECS patterns for game objects where appropriate
+9. **Event-Driven** – Implement pub/sub for game events and collaboration
+
+### Quality Standards
+10. **Performance Testing** – Game engine changes require 60fps validation
+11. **Asset Optimization** – All media must pass through optimization pipeline
+12. **Security First** – Validate all user-generated content, scan uploaded assets
+13. **Accessibility** – Ensure keyboard navigation and screen reader support
+14. **Cross-Platform** – Test on desktop, mobile, and tablet devices
+
+### Development Workflow
+15. **Game-Focused Planning** – Consider performance, user experience, and collaboration
+16. **Asset-Aware Development** – Account for asset loading and processing times
+17. **Real-time Testing** – Test collaboration features with multiple users
+18. **No Debug Code** – Remove `console.log`, performance monitoring in production only
+19. **Dependency Justification** – New packages require performance impact assessment
+20. **Commit Flow** – **Plan → Approve → Implement → Review → Test → Commit**
+
+See domain-specific docs: `game-editor.md`, `game-engine.md`, `asset-pipeline.md`
 
 ---
 
